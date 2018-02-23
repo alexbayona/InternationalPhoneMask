@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="intl-tel-input/css/intlTelInput.css" />
+</head>
+
+<body>
+    <form id="contactForm" action="#">
+        <label>Phone number</label>
+        <input type="tel" class="form-control" name="phoneNumber" id="phoneNumber" required/>
+    </form>
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- International Telephone Input -->
+    <script src="intl-tel-input/js/intlTelInput.min.js"></script>
+    <!-- Jquery inputmask -->
+    <script src="inputmask/jquery.inputmask.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            //Initial mask, e.g.: 7451 1547
+            $("#phoneNumber").inputmask({
+                "mask": "9999 9999"
+            });
+
+            //Initialize phone element
+            $('#contactForm')
+                .find('[name="phoneNumber"]')
+                .intlTelInput({
+                    utilsScript: 'intl-tel-input/js/utils.js',
+                    autoPlaceholder: true,
+                    preferredCountries: ['sv', 'us']
+                });
+
+            //Event on change for getting the new country's phone format and setting the mask accordingly                
+            $("#phoneNumber").on("countrychange", function (e, countryData) {
+                var str = $(this).attr('placeholder');
+                var res = str.replace(/[0-9]/g, "9");
+                //console.log(res);
+
+                $('#phoneNumber').val("");
+                $('#phoneNumber').inputmask("remove");
+                $('#phoneNumber').inputmask(res);
+            });
+        });
+    </script>
+</body>
+
+</html>
