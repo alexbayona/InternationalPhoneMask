@@ -6,5 +6,5 @@ Easy input example, putting together this two great jquery plugins:
 
 ## Requirements
 
-Jquery (v. 3.x was used)
-The latest versions of both plugins previously listed.
+- Jquery (v. 3.x was used)
+- The latest versions of both plugins previously listed.
